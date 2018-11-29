@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+   <!-- generate entity时，生成serialVersionUID -->  
+    <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+  	<!-- <commentGenerator>
+		是否去除自动生成的注释 true：是 false：否
+		<property name="suppressAllComments" value="true"/>
+	</commentGenerator> -->
+	<commentGenerator type="club.itinfo.plugin.generator.mb2generator.MB2CommentGenerator">
+		<!-- 是否去除自动生成的注释 true：是 false：否 -->
+		<!-- <property name="suppressAllComments" value="true"/> -->
+	</commentGenerator>
+    <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://172.21.1.22:5560/bcsyz"
+        userId="csyhoa"
+        password="csyhoa">
+    </jdbcConnection> -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/pmc"
+        userId="root"
+        password="">
+    </jdbcConnection>
+
+	<!-- 该元素指定我们总是希望为DECIMAL和NUMERIC列使用java.math.BigDecimal类型  金额类型-->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="true" />
+    </javaTypeResolver>
+
+    <!-- targetProject：生成pojo类的位置 -->
+    <javaModelGenerator targetPackage="com.bcs.tja.domain" targetProject="/Users/tangxiaoxin/work/my_workspace/PMC/src/main/java">
+     <!-- enableSubPackages:是否让schema作为包的后缀 -->
+      <property name="enableSubPackages" value="true" />
+      <!-- 从数据库返回的值被清理前后的空格 -->
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!-- targetProject：mapper映射文件生成的位置 -->
+    <sqlMapGenerator targetPackage="com.bcs.tja.mapper"  targetProject="/Users/tangxiaoxin/work/my_workspace/PMC/src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+	
+	<!-- targetPackage:mapper接口生成的位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.bcs.tja.dao"  targetProject="/Users/tangxiaoxin/work/my_workspace/PMC/src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+    <!-- <table tableName="sys_role" domainObjectName="SysRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_emp_role" domainObjectName="SysEmpRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_seal" domainObjectName="SysSeal" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_org_seal" domainObjectName="SysOrgSeal" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_seal_type_form" domainObjectName="SysSealTypeForm" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_seal_type" domainObjectName="SysSealType" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_seal_model" domainObjectName="SysSealModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_seal_type_model" domainObjectName="SysSealTypeModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    
+    
+    
+    <table tableName="form_base" domainObjectName="FormBase" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+
+    <!-- <table tableName="form_apply" domainObjectName="FormApply" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+     -->
+    
+    <!-- <table tableName="form_bank" domainObjectName="FormBank" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="form_trade_union" domainObjectName="FormTradeUnion" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="form_bank_dept" domainObjectName="FormBankDept" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="form_group" domainObjectName="FormGroup" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="form_party" domainObjectName="FormParty" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="form_small_business_credit" domainObjectName="FormSmallBusinessCredit" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="form_other" domainObjectName="FormOther" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+
+    <table tableName="form_use_seal" domainObjectName="FormUseSeal" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+
+    <table tableName="base_resource" domainObjectName="BaseResource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    
+     -->
+     <!-- <table tableName="log_seal_report" domainObjectName="LogSealReport" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    
+    <!-- <table tableName="sys_seal_type" domainObjectName="SysSealType" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    
+    <!-- <table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    <table tableName="sys_login_log" domainObjectName="SysLoginLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    <!-- <table tableName="opinions_common" domainObjectName="OpinionsCommon" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    <!-- <table tableName="apply_number_version" domainObjectName="ApplyNumberVersion" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    
+    <!-- <table tableName="sys_transfer" domainObjectName="SysTransfer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    <!-- <table tableName="form_use_seal_attach" domainObjectName="FormUseSealAttach" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    <!-- <table tableName="sys_seal_emp" domainObjectName="SysSealEmp" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/> -->
+    <table tableName="role" domainObjectName="Role" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>
+    
+  </context>
+</generatorConfiguration>

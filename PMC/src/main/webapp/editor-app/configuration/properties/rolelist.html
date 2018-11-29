@@ -1,0 +1,49 @@
+<div class="modal" ng-controller="KisBpmRolesPopupCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+                <h2 translate>选择角色</h2>
+            </div>
+            <div class="modal-body">
+            	<style type="text/css">
+            		.role-table tr[selected] td{
+            			background: #F2DEDF;
+            		}
+            		
+            		.input-p {
+						line-height: 33px;
+						height: 33px;
+						padding: 0px 10px;
+						overflow: hidden;
+						border: 1px solid #ddd;
+						border-radius: 4px;
+						overflow: hidden;
+						margin-bottom: 10px;
+					}
+					
+            	</style>
+            	<!-- <p class="input-p" id="inputP"></p> -->
+				<table class="role-table table table-bordered">
+					<tr>
+						<th>角色名称</th>
+						<th>角色描述</th>
+						<th style="text-align: center;">操作</th>
+					</tr>
+					<tr ng-repeat="x in rows" id="tr{{x.id}}" ng-selected="{{x.selected}}">
+				        <td>{{x.name}}</td>
+				        <td>{{x.desc}}</td>
+				        <td align="center">
+				        	<a href="javascript:void(0)" ng-click="selectRole($event);" id="{{x.id}}" value="{{x.name}}">选择</a>
+				        </td>
+				    </tr>
+				</table>
+			</div>
+            <div class="modal-footer">
+                <button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+                <button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>
+		

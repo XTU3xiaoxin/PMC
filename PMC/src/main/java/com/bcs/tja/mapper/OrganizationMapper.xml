@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bcs.tja.dao.OrganizationDao">
+  <resultMap id="BaseResultMap" type="com.bcs.tja.domain.Organization">
+    <id column="ORGID" jdbcType="VARCHAR" property="orgid" />
+    <result column="ORGNAME" jdbcType="VARCHAR" property="orgname" />
+    <result column="PORGID" jdbcType="VARCHAR" property="porgid" />
+    <result column="UNITID" jdbcType="VARCHAR" property="unitid" />
+    <result column="UNITNAME" jdbcType="VARCHAR" property="unitname" />
+    <result column="DEPTID" jdbcType="VARCHAR" property="deptid" />
+    <result column="DEPTNAME" jdbcType="VARCHAR" property="deptname" />
+    <result column="ORGCODE" jdbcType="VARCHAR" property="orgcode" />
+    <result column="ORGTYPE" jdbcType="VARCHAR" property="orgtype" />
+    <result column="CANCELDATE" jdbcType="VARCHAR" property="canceldate" />
+    <result column="CREATEDATE" jdbcType="VARCHAR" property="createdate" />
+    <result column="ISLEAF" jdbcType="VARCHAR" property="isleaf" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="DISPLAYORDER" jdbcType="VARCHAR" property="displayorder" />
+    <result column="ORGSTATUS" jdbcType="VARCHAR" property="orgstatus" />
+    <result column="SALUNITID" jdbcType="VARCHAR" property="salunitid" />
+    <result column="SALUNITNAME" jdbcType="VARCHAR" property="salunitname" />
+    <result column="ORGLEVEL" jdbcType="VARCHAR" property="orglevel" />
+    <result column="OBJECTTYPEID" jdbcType="VARCHAR" property="objecttypeid" />
+    <result column="OBJECTTYPENAME" jdbcType="VARCHAR" property="objecttypename" />
+    <result column="ORGSN" jdbcType="DOUBLE" property="orgsn" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+  </resultMap>
+  
+   <resultMap id="OrgTreeDataMap" type="com.bcs.tja.data.vo.OrganizationVo">
+    <id column="ORGID" jdbcType="VARCHAR" property="id" />
+    <result column="ORGNAME" jdbcType="VARCHAR" property="name" />
+    <result column="ORGCODE" jdbcType="VARCHAR" property="orgCode" />
+    <result column="PORGID" jdbcType="VARCHAR" property="pid" />
+  </resultMap>
+  
+  	<!-- 获取全部组织信息 -->
+  	<select id="findOrgTreeData" resultMap="OrgTreeDataMap">
+		SELECT o.ORGID, o.ORGNAME, o.PORGID, o.ORGCODE FROM v_sys_organization o where o.delete_status = 0 
+  	</select>
+  	
+  <sql id="Base_Column_List">
+    ORGID, ORGNAME, PORGID, UNITID, UNITNAME, DEPTID, DEPTNAME, ORGCODE, ORGTYPE, CANCELDATE, 
+    CREATEDATE, ISLEAF, DESCRIPTION, DISPLAYORDER, ORGSTATUS, SALUNITID, SALUNITNAME, 
+    ORGLEVEL, OBJECTTYPEID, OBJECTTYPENAME, ORGSN, update_time, delete_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from v_sys_organization
+    where ORGID = #{orgid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from v_sys_organization
+    where ORGID = #{orgid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bcs.tja.domain.Organization">
+    insert into v_sys_organization (ORGID, ORGNAME, PORGID, 
+      UNITID, UNITNAME, DEPTID, 
+      DEPTNAME, ORGCODE, ORGTYPE, 
+      CANCELDATE, CREATEDATE, ISLEAF, 
+      DESCRIPTION, DISPLAYORDER, ORGSTATUS, 
+      SALUNITID, SALUNITNAME, ORGLEVEL, 
+      OBJECTTYPEID, OBJECTTYPENAME, ORGSN, 
+      update_time, delete_status)
+    values (#{orgid,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, #{porgid,jdbcType=VARCHAR}, 
+      #{unitid,jdbcType=VARCHAR}, #{unitname,jdbcType=VARCHAR}, #{deptid,jdbcType=VARCHAR}, 
+      #{deptname,jdbcType=VARCHAR}, #{orgcode,jdbcType=VARCHAR}, #{orgtype,jdbcType=VARCHAR}, 
+      #{canceldate,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, #{isleaf,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{displayorder,jdbcType=VARCHAR}, #{orgstatus,jdbcType=VARCHAR}, 
+      #{salunitid,jdbcType=VARCHAR}, #{salunitname,jdbcType=VARCHAR}, #{orglevel,jdbcType=VARCHAR}, 
+      #{objecttypeid,jdbcType=VARCHAR}, #{objecttypename,jdbcType=VARCHAR}, #{orgsn,jdbcType=DOUBLE}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleteStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bcs.tja.domain.Organization">
+    insert into v_sys_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgid != null">
+        ORGID,
+      </if>
+      <if test="orgname != null">
+        ORGNAME,
+      </if>
+      <if test="porgid != null">
+        PORGID,
+      </if>
+      <if test="unitid != null">
+        UNITID,
+      </if>
+      <if test="unitname != null">
+        UNITNAME,
+      </if>
+      <if test="deptid != null">
+        DEPTID,
+      </if>
+      <if test="deptname != null">
+        DEPTNAME,
+      </if>
+      <if test="orgcode != null">
+        ORGCODE,
+      </if>
+      <if test="orgtype != null">
+        ORGTYPE,
+      </if>
+      <if test="canceldate != null">
+        CANCELDATE,
+      </if>
+      <if test="createdate != null">
+        CREATEDATE,
+      </if>
+      <if test="isleaf != null">
+        ISLEAF,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="displayorder != null">
+        DISPLAYORDER,
+      </if>
+      <if test="orgstatus != null">
+        ORGSTATUS,
+      </if>
+      <if test="salunitid != null">
+        SALUNITID,
+      </if>
+      <if test="salunitname != null">
+        SALUNITNAME,
+      </if>
+      <if test="orglevel != null">
+        ORGLEVEL,
+      </if>
+      <if test="objecttypeid != null">
+        OBJECTTYPEID,
+      </if>
+      <if test="objecttypename != null">
+        OBJECTTYPENAME,
+      </if>
+      <if test="orgsn != null">
+        ORGSN,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgid != null">
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null">
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null">
+        #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null">
+        #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null">
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcode != null">
+        #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtype != null">
+        #{orgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="canceldate != null">
+        #{canceldate,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null">
+        #{isleaf,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        #{displayorder,jdbcType=VARCHAR},
+      </if>
+      <if test="orgstatus != null">
+        #{orgstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitid != null">
+        #{salunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitname != null">
+        #{salunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="orglevel != null">
+        #{orglevel,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttypeid != null">
+        #{objecttypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttypename != null">
+        #{objecttypename,jdbcType=VARCHAR},
+      </if>
+      <if test="orgsn != null">
+        #{orgsn,jdbcType=DOUBLE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bcs.tja.domain.Organization">
+    update v_sys_organization
+    <set>
+      <if test="orgname != null">
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null">
+        PORGID = #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null">
+        UNITID = #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null">
+        UNITNAME = #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        DEPTID = #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcode != null">
+        ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtype != null">
+        ORGTYPE = #{orgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="canceldate != null">
+        CANCELDATE = #{canceldate,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        CREATEDATE = #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null">
+        ISLEAF = #{isleaf,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        DISPLAYORDER = #{displayorder,jdbcType=VARCHAR},
+      </if>
+      <if test="orgstatus != null">
+        ORGSTATUS = #{orgstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitid != null">
+        SALUNITID = #{salunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitname != null">
+        SALUNITNAME = #{salunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="orglevel != null">
+        ORGLEVEL = #{orglevel,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttypeid != null">
+        OBJECTTYPEID = #{objecttypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttypename != null">
+        OBJECTTYPENAME = #{objecttypename,jdbcType=VARCHAR},
+      </if>
+      <if test="orgsn != null">
+        ORGSN = #{orgsn,jdbcType=DOUBLE},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ORGID = #{orgid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bcs.tja.domain.Organization">
+    update v_sys_organization
+    set ORGNAME = #{orgname,jdbcType=VARCHAR},
+      PORGID = #{porgid,jdbcType=VARCHAR},
+      UNITID = #{unitid,jdbcType=VARCHAR},
+      UNITNAME = #{unitname,jdbcType=VARCHAR},
+      DEPTID = #{deptid,jdbcType=VARCHAR},
+      DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      ORGTYPE = #{orgtype,jdbcType=VARCHAR},
+      CANCELDATE = #{canceldate,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=VARCHAR},
+      ISLEAF = #{isleaf,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      DISPLAYORDER = #{displayorder,jdbcType=VARCHAR},
+      ORGSTATUS = #{orgstatus,jdbcType=VARCHAR},
+      SALUNITID = #{salunitid,jdbcType=VARCHAR},
+      SALUNITNAME = #{salunitname,jdbcType=VARCHAR},
+      ORGLEVEL = #{orglevel,jdbcType=VARCHAR},
+      OBJECTTYPEID = #{objecttypeid,jdbcType=VARCHAR},
+      OBJECTTYPENAME = #{objecttypename,jdbcType=VARCHAR},
+      ORGSN = #{orgsn,jdbcType=DOUBLE},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_status = #{deleteStatus,jdbcType=INTEGER}
+    where ORGID = #{orgid,jdbcType=VARCHAR}
+  </update>
+</mapper>

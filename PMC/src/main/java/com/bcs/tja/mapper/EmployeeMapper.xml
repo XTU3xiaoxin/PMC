@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bcs.tja.dao.EmployeeDao">
+  <resultMap id="BaseResultMap" type="com.bcs.tja.domain.Employee">
+    <id column="EMPID" jdbcType="VARCHAR" property="empid" />
+    <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    <result column="DISPLAYORDER" jdbcType="VARCHAR" property="displayorder" />
+    <result column="ORGID" jdbcType="VARCHAR" property="orgid" />
+    <result column="ORGNAME" jdbcType="VARCHAR" property="orgname" />
+    <result column="DEPTID" jdbcType="VARCHAR" property="deptid" />
+    <result column="DEPTNAME" jdbcType="VARCHAR" property="deptname" />
+    <result column="UNITID" jdbcType="VARCHAR" property="unitid" />
+    <result column="UNITNAME" jdbcType="VARCHAR" property="unitname" />
+    <result column="SALUNITID" jdbcType="VARCHAR" property="salunitid" />
+    <result column="SALUNITNAME" jdbcType="VARCHAR" property="salunitname" />
+    <result column="SBOOKS" jdbcType="VARCHAR" property="sbooks" />
+    <result column="ISSALARYPAY" jdbcType="VARCHAR" property="issalarypay" />
+    <result column="POSSERIAL" jdbcType="VARCHAR" property="posserial" />
+    <result column="POSSERIALLEVEL" jdbcType="VARCHAR" property="posseriallevel" />
+    <result column="CLIENTMNGTYPE" jdbcType="VARCHAR" property="clientmngtype" />
+    <result column="POSID" jdbcType="VARCHAR" property="posid" />
+    <result column="POSNAME" jdbcType="VARCHAR" property="posname" />
+    <result column="POSCLASSIFYID" jdbcType="VARCHAR" property="posclassifyid" />
+    <result column="POSCLASSIFYNAME" jdbcType="VARCHAR" property="posclassifyname" />
+    <result column="EMPTYPE" jdbcType="VARCHAR" property="emptype" />
+    <result column="WORKSTATUS" jdbcType="VARCHAR" property="workstatus" />
+    <result column="ADMINDUTYID" jdbcType="VARCHAR" property="admindutyid" />
+    <result column="ADMINDUTY" jdbcType="VARCHAR" property="adminduty" />
+    <result column="IDENTITYNO" jdbcType="VARCHAR" property="identityno" />
+    <result column="BIRTHDATE" jdbcType="VARCHAR" property="birthdate" />
+    <result column="AGE" jdbcType="VARCHAR" property="age" />
+    <result column="WORKDATE" jdbcType="VARCHAR" property="workdate" />
+    <result column="JOINBCSDATE" jdbcType="VARCHAR" property="joinbcsdate" />
+    <result column="JOINBCSTYPE" jdbcType="VARCHAR" property="joinbcstype" />
+    <result column="FINANCEWYBEFOREBCS" jdbcType="VARCHAR" property="financewybeforebcs" />
+    <result column="WORKYEAR" jdbcType="VARCHAR" property="workyear" />
+    <result column="BCSWORKYEAR" jdbcType="VARCHAR" property="bcsworkyear" />
+    <result column="FINANCEWORKYEAR" jdbcType="VARCHAR" property="financeworkyear" />
+    <result column="PROFTITLE" jdbcType="VARCHAR" property="proftitle" />
+    <result column="ONDUTYTIME" jdbcType="VARCHAR" property="ondutytime" />
+    <result column="FAMILYTEL" jdbcType="VARCHAR" property="familytel" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="SCHOOL" jdbcType="VARCHAR" property="school" />
+    <result column="EDUDEGREE" jdbcType="VARCHAR" property="edudegree" />
+    <result column="ACADEGREE" jdbcType="VARCHAR" property="acadegree" />
+    <result column="EDUYEAR" jdbcType="VARCHAR" property="eduyear" />
+    <result column="PROFTYPE" jdbcType="VARCHAR" property="proftype" />
+    <result column="MAJOR" jdbcType="VARCHAR" property="major" />
+    <result column="EDUTYPE" jdbcType="VARCHAR" property="edutype" />
+    <result column="USEDNAME" jdbcType="VARCHAR" property="usedname" />
+    <result column="GENDER" jdbcType="VARCHAR" property="gender" />
+    <result column="RACE" jdbcType="VARCHAR" property="race" />
+    <result column="ARCHIVENO" jdbcType="VARCHAR" property="archiveno" />
+    <result column="POLITICAL" jdbcType="VARCHAR" property="political" />
+    <result column="FAMILYADDR" jdbcType="VARCHAR" property="familyaddr" />
+    <result column="MARRIAGE" jdbcType="VARCHAR" property="marriage" />
+    <result column="ORIGIN" jdbcType="VARCHAR" property="origin" />
+    <result column="ORIGINADDR" jdbcType="VARCHAR" property="originaddr" />
+    <result column="EMPPHOTO" jdbcType="VARCHAR" property="empphoto" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="USERSN" jdbcType="DOUBLE" property="usersn" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="is_assigned" jdbcType="INTEGER" property="isAssigned" />
+    <result column="assign_employee_id" jdbcType="VARCHAR" property="assignEmployeeId" />
+    <result column="assign_employee_name" jdbcType="VARCHAR" property="assignEmployeeName" />
+    <result column="assign_start_time" jdbcType="TIMESTAMP" property="assignStartTime" />
+    <result column="assign_end_time" jdbcType="TIMESTAMP" property="assignEndTime" />
+    <result column="CORNET" jdbcType="VARCHAR" property="cornet" />
+    <result column="WORKTEL" jdbcType="VARCHAR" property="worktel" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EMPID, EMPNAME, DISPLAYORDER, ORGID, ORGNAME, DEPTID, DEPTNAME, UNITID, UNITNAME, 
+    SALUNITID, SALUNITNAME, SBOOKS, ISSALARYPAY, POSSERIAL, POSSERIALLEVEL, CLIENTMNGTYPE, 
+    POSID, POSNAME, POSCLASSIFYID, POSCLASSIFYNAME, EMPTYPE, WORKSTATUS, ADMINDUTYID, 
+    ADMINDUTY, IDENTITYNO, BIRTHDATE, AGE, WORKDATE, JOINBCSDATE, JOINBCSTYPE, FINANCEWYBEFOREBCS, 
+    WORKYEAR, BCSWORKYEAR, FINANCEWORKYEAR, PROFTITLE, ONDUTYTIME, FAMILYTEL, MOBILE, 
+    SCHOOL, EDUDEGREE, ACADEGREE, EDUYEAR, PROFTYPE, MAJOR, EDUTYPE, USEDNAME, GENDER, 
+    RACE, ARCHIVENO, POLITICAL, FAMILYADDR, MARRIAGE, ORIGIN, ORIGINADDR, EMPPHOTO, EMAIL, 
+    USERSN, PASSWORD, is_assigned, assign_employee_id, assign_employee_name, assign_start_time, 
+    assign_end_time, CORNET, WORKTEL, org_code, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from v_sys_employee
+    where EMPID = #{empid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from v_sys_employee
+    where EMPID = #{empid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bcs.tja.domain.Employee">
+    insert into v_sys_employee (EMPID, EMPNAME, DISPLAYORDER, 
+      ORGID, ORGNAME, DEPTID, 
+      DEPTNAME, UNITID, UNITNAME, 
+      SALUNITID, SALUNITNAME, SBOOKS, 
+      ISSALARYPAY, POSSERIAL, POSSERIALLEVEL, 
+      CLIENTMNGTYPE, POSID, POSNAME, 
+      POSCLASSIFYID, POSCLASSIFYNAME, EMPTYPE, 
+      WORKSTATUS, ADMINDUTYID, ADMINDUTY, 
+      IDENTITYNO, BIRTHDATE, AGE, 
+      WORKDATE, JOINBCSDATE, JOINBCSTYPE, 
+      FINANCEWYBEFOREBCS, WORKYEAR, BCSWORKYEAR, 
+      FINANCEWORKYEAR, PROFTITLE, ONDUTYTIME, 
+      FAMILYTEL, MOBILE, SCHOOL, 
+      EDUDEGREE, ACADEGREE, EDUYEAR, 
+      PROFTYPE, MAJOR, EDUTYPE, 
+      USEDNAME, GENDER, RACE, 
+      ARCHIVENO, POLITICAL, FAMILYADDR, 
+      MARRIAGE, ORIGIN, ORIGINADDR, 
+      EMPPHOTO, EMAIL, USERSN, 
+      PASSWORD, is_assigned, assign_employee_id, 
+      assign_employee_name, assign_start_time, 
+      assign_end_time, CORNET, WORKTEL, 
+      org_code, update_time)
+    values (#{empid,jdbcType=VARCHAR}, #{empname,jdbcType=VARCHAR}, #{displayorder,jdbcType=VARCHAR}, 
+      #{orgid,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, #{deptid,jdbcType=VARCHAR}, 
+      #{deptname,jdbcType=VARCHAR}, #{unitid,jdbcType=VARCHAR}, #{unitname,jdbcType=VARCHAR}, 
+      #{salunitid,jdbcType=VARCHAR}, #{salunitname,jdbcType=VARCHAR}, #{sbooks,jdbcType=VARCHAR}, 
+      #{issalarypay,jdbcType=VARCHAR}, #{posserial,jdbcType=VARCHAR}, #{posseriallevel,jdbcType=VARCHAR}, 
+      #{clientmngtype,jdbcType=VARCHAR}, #{posid,jdbcType=VARCHAR}, #{posname,jdbcType=VARCHAR}, 
+      #{posclassifyid,jdbcType=VARCHAR}, #{posclassifyname,jdbcType=VARCHAR}, #{emptype,jdbcType=VARCHAR}, 
+      #{workstatus,jdbcType=VARCHAR}, #{admindutyid,jdbcType=VARCHAR}, #{adminduty,jdbcType=VARCHAR}, 
+      #{identityno,jdbcType=VARCHAR}, #{birthdate,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
+      #{workdate,jdbcType=VARCHAR}, #{joinbcsdate,jdbcType=VARCHAR}, #{joinbcstype,jdbcType=VARCHAR}, 
+      #{financewybeforebcs,jdbcType=VARCHAR}, #{workyear,jdbcType=VARCHAR}, #{bcsworkyear,jdbcType=VARCHAR}, 
+      #{financeworkyear,jdbcType=VARCHAR}, #{proftitle,jdbcType=VARCHAR}, #{ondutytime,jdbcType=VARCHAR}, 
+      #{familytel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{edudegree,jdbcType=VARCHAR}, #{acadegree,jdbcType=VARCHAR}, #{eduyear,jdbcType=VARCHAR}, 
+      #{proftype,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{edutype,jdbcType=VARCHAR}, 
+      #{usedname,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{race,jdbcType=VARCHAR}, 
+      #{archiveno,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, #{familyaddr,jdbcType=VARCHAR}, 
+      #{marriage,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{originaddr,jdbcType=VARCHAR}, 
+      #{empphoto,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{usersn,jdbcType=DOUBLE}, 
+      #{password,jdbcType=VARCHAR}, #{isAssigned,jdbcType=INTEGER}, #{assignEmployeeId,jdbcType=VARCHAR}, 
+      #{assignEmployeeName,jdbcType=VARCHAR}, #{assignStartTime,jdbcType=TIMESTAMP}, 
+      #{assignEndTime,jdbcType=TIMESTAMP}, #{cornet,jdbcType=VARCHAR}, #{worktel,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bcs.tja.domain.Employee">
+    insert into v_sys_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        EMPID,
+      </if>
+      <if test="empname != null">
+        EMPNAME,
+      </if>
+      <if test="displayorder != null">
+        DISPLAYORDER,
+      </if>
+      <if test="orgid != null">
+        ORGID,
+      </if>
+      <if test="orgname != null">
+        ORGNAME,
+      </if>
+      <if test="deptid != null">
+        DEPTID,
+      </if>
+      <if test="deptname != null">
+        DEPTNAME,
+      </if>
+      <if test="unitid != null">
+        UNITID,
+      </if>
+      <if test="unitname != null">
+        UNITNAME,
+      </if>
+      <if test="salunitid != null">
+        SALUNITID,
+      </if>
+      <if test="salunitname != null">
+        SALUNITNAME,
+      </if>
+      <if test="sbooks != null">
+        SBOOKS,
+      </if>
+      <if test="issalarypay != null">
+        ISSALARYPAY,
+      </if>
+      <if test="posserial != null">
+        POSSERIAL,
+      </if>
+      <if test="posseriallevel != null">
+        POSSERIALLEVEL,
+      </if>
+      <if test="clientmngtype != null">
+        CLIENTMNGTYPE,
+      </if>
+      <if test="posid != null">
+        POSID,
+      </if>
+      <if test="posname != null">
+        POSNAME,
+      </if>
+      <if test="posclassifyid != null">
+        POSCLASSIFYID,
+      </if>
+      <if test="posclassifyname != null">
+        POSCLASSIFYNAME,
+      </if>
+      <if test="emptype != null">
+        EMPTYPE,
+      </if>
+      <if test="workstatus != null">
+        WORKSTATUS,
+      </if>
+      <if test="admindutyid != null">
+        ADMINDUTYID,
+      </if>
+      <if test="adminduty != null">
+        ADMINDUTY,
+      </if>
+      <if test="identityno != null">
+        IDENTITYNO,
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="workdate != null">
+        WORKDATE,
+      </if>
+      <if test="joinbcsdate != null">
+        JOINBCSDATE,
+      </if>
+      <if test="joinbcstype != null">
+        JOINBCSTYPE,
+      </if>
+      <if test="financewybeforebcs != null">
+        FINANCEWYBEFOREBCS,
+      </if>
+      <if test="workyear != null">
+        WORKYEAR,
+      </if>
+      <if test="bcsworkyear != null">
+        BCSWORKYEAR,
+      </if>
+      <if test="financeworkyear != null">
+        FINANCEWORKYEAR,
+      </if>
+      <if test="proftitle != null">
+        PROFTITLE,
+      </if>
+      <if test="ondutytime != null">
+        ONDUTYTIME,
+      </if>
+      <if test="familytel != null">
+        FAMILYTEL,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="school != null">
+        SCHOOL,
+      </if>
+      <if test="edudegree != null">
+        EDUDEGREE,
+      </if>
+      <if test="acadegree != null">
+        ACADEGREE,
+      </if>
+      <if test="eduyear != null">
+        EDUYEAR,
+      </if>
+      <if test="proftype != null">
+        PROFTYPE,
+      </if>
+      <if test="major != null">
+        MAJOR,
+      </if>
+      <if test="edutype != null">
+        EDUTYPE,
+      </if>
+      <if test="usedname != null">
+        USEDNAME,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="race != null">
+        RACE,
+      </if>
+      <if test="archiveno != null">
+        ARCHIVENO,
+      </if>
+      <if test="political != null">
+        POLITICAL,
+      </if>
+      <if test="familyaddr != null">
+        FAMILYADDR,
+      </if>
+      <if test="marriage != null">
+        MARRIAGE,
+      </if>
+      <if test="origin != null">
+        ORIGIN,
+      </if>
+      <if test="originaddr != null">
+        ORIGINADDR,
+      </if>
+      <if test="empphoto != null">
+        EMPPHOTO,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="usersn != null">
+        USERSN,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="isAssigned != null">
+        is_assigned,
+      </if>
+      <if test="assignEmployeeId != null">
+        assign_employee_id,
+      </if>
+      <if test="assignEmployeeName != null">
+        assign_employee_name,
+      </if>
+      <if test="assignStartTime != null">
+        assign_start_time,
+      </if>
+      <if test="assignEndTime != null">
+        assign_end_time,
+      </if>
+      <if test="cornet != null">
+        CORNET,
+      </if>
+      <if test="worktel != null">
+        WORKTEL,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        #{empid,jdbcType=VARCHAR},
+      </if>
+      <if test="empname != null">
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        #{displayorder,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null">
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null">
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null">
+        #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null">
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitid != null">
+        #{salunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitname != null">
+        #{salunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="sbooks != null">
+        #{sbooks,jdbcType=VARCHAR},
+      </if>
+      <if test="issalarypay != null">
+        #{issalarypay,jdbcType=VARCHAR},
+      </if>
+      <if test="posserial != null">
+        #{posserial,jdbcType=VARCHAR},
+      </if>
+      <if test="posseriallevel != null">
+        #{posseriallevel,jdbcType=VARCHAR},
+      </if>
+      <if test="clientmngtype != null">
+        #{clientmngtype,jdbcType=VARCHAR},
+      </if>
+      <if test="posid != null">
+        #{posid,jdbcType=VARCHAR},
+      </if>
+      <if test="posname != null">
+        #{posname,jdbcType=VARCHAR},
+      </if>
+      <if test="posclassifyid != null">
+        #{posclassifyid,jdbcType=VARCHAR},
+      </if>
+      <if test="posclassifyname != null">
+        #{posclassifyname,jdbcType=VARCHAR},
+      </if>
+      <if test="emptype != null">
+        #{emptype,jdbcType=VARCHAR},
+      </if>
+      <if test="workstatus != null">
+        #{workstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="admindutyid != null">
+        #{admindutyid,jdbcType=VARCHAR},
+      </if>
+      <if test="adminduty != null">
+        #{adminduty,jdbcType=VARCHAR},
+      </if>
+      <if test="identityno != null">
+        #{identityno,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null">
+        #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="workdate != null">
+        #{workdate,jdbcType=VARCHAR},
+      </if>
+      <if test="joinbcsdate != null">
+        #{joinbcsdate,jdbcType=VARCHAR},
+      </if>
+      <if test="joinbcstype != null">
+        #{joinbcstype,jdbcType=VARCHAR},
+      </if>
+      <if test="financewybeforebcs != null">
+        #{financewybeforebcs,jdbcType=VARCHAR},
+      </if>
+      <if test="workyear != null">
+        #{workyear,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsworkyear != null">
+        #{bcsworkyear,jdbcType=VARCHAR},
+      </if>
+      <if test="financeworkyear != null">
+        #{financeworkyear,jdbcType=VARCHAR},
+      </if>
+      <if test="proftitle != null">
+        #{proftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ondutytime != null">
+        #{ondutytime,jdbcType=VARCHAR},
+      </if>
+      <if test="familytel != null">
+        #{familytel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="edudegree != null">
+        #{edudegree,jdbcType=VARCHAR},
+      </if>
+      <if test="acadegree != null">
+        #{acadegree,jdbcType=VARCHAR},
+      </if>
+      <if test="eduyear != null">
+        #{eduyear,jdbcType=VARCHAR},
+      </if>
+      <if test="proftype != null">
+        #{proftype,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="edutype != null">
+        #{edutype,jdbcType=VARCHAR},
+      </if>
+      <if test="usedname != null">
+        #{usedname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="race != null">
+        #{race,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveno != null">
+        #{archiveno,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddr != null">
+        #{familyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="originaddr != null">
+        #{originaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="empphoto != null">
+        #{empphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="usersn != null">
+        #{usersn,jdbcType=DOUBLE},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isAssigned != null">
+        #{isAssigned,jdbcType=INTEGER},
+      </if>
+      <if test="assignEmployeeId != null">
+        #{assignEmployeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignEmployeeName != null">
+        #{assignEmployeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="assignStartTime != null">
+        #{assignStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignEndTime != null">
+        #{assignEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cornet != null">
+        #{cornet,jdbcType=VARCHAR},
+      </if>
+      <if test="worktel != null">
+        #{worktel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bcs.tja.domain.Employee">
+    update v_sys_employee
+    <set>
+      <if test="empname != null">
+        EMPNAME = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        DISPLAYORDER = #{displayorder,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null">
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null">
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        DEPTID = #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null">
+        DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null">
+        UNITID = #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null">
+        UNITNAME = #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitid != null">
+        SALUNITID = #{salunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="salunitname != null">
+        SALUNITNAME = #{salunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="sbooks != null">
+        SBOOKS = #{sbooks,jdbcType=VARCHAR},
+      </if>
+      <if test="issalarypay != null">
+        ISSALARYPAY = #{issalarypay,jdbcType=VARCHAR},
+      </if>
+      <if test="posserial != null">
+        POSSERIAL = #{posserial,jdbcType=VARCHAR},
+      </if>
+      <if test="posseriallevel != null">
+        POSSERIALLEVEL = #{posseriallevel,jdbcType=VARCHAR},
+      </if>
+      <if test="clientmngtype != null">
+        CLIENTMNGTYPE = #{clientmngtype,jdbcType=VARCHAR},
+      </if>
+      <if test="posid != null">
+        POSID = #{posid,jdbcType=VARCHAR},
+      </if>
+      <if test="posname != null">
+        POSNAME = #{posname,jdbcType=VARCHAR},
+      </if>
+      <if test="posclassifyid != null">
+        POSCLASSIFYID = #{posclassifyid,jdbcType=VARCHAR},
+      </if>
+      <if test="posclassifyname != null">
+        POSCLASSIFYNAME = #{posclassifyname,jdbcType=VARCHAR},
+      </if>
+      <if test="emptype != null">
+        EMPTYPE = #{emptype,jdbcType=VARCHAR},
+      </if>
+      <if test="workstatus != null">
+        WORKSTATUS = #{workstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="admindutyid != null">
+        ADMINDUTYID = #{admindutyid,jdbcType=VARCHAR},
+      </if>
+      <if test="adminduty != null">
+        ADMINDUTY = #{adminduty,jdbcType=VARCHAR},
+      </if>
+      <if test="identityno != null">
+        IDENTITYNO = #{identityno,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE = #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="workdate != null">
+        WORKDATE = #{workdate,jdbcType=VARCHAR},
+      </if>
+      <if test="joinbcsdate != null">
+        JOINBCSDATE = #{joinbcsdate,jdbcType=VARCHAR},
+      </if>
+      <if test="joinbcstype != null">
+        JOINBCSTYPE = #{joinbcstype,jdbcType=VARCHAR},
+      </if>
+      <if test="financewybeforebcs != null">
+        FINANCEWYBEFOREBCS = #{financewybeforebcs,jdbcType=VARCHAR},
+      </if>
+      <if test="workyear != null">
+        WORKYEAR = #{workyear,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsworkyear != null">
+        BCSWORKYEAR = #{bcsworkyear,jdbcType=VARCHAR},
+      </if>
+      <if test="financeworkyear != null">
+        FINANCEWORKYEAR = #{financeworkyear,jdbcType=VARCHAR},
+      </if>
+      <if test="proftitle != null">
+        PROFTITLE = #{proftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ondutytime != null">
+        ONDUTYTIME = #{ondutytime,jdbcType=VARCHAR},
+      </if>
+      <if test="familytel != null">
+        FAMILYTEL = #{familytel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="edudegree != null">
+        EDUDEGREE = #{edudegree,jdbcType=VARCHAR},
+      </if>
+      <if test="acadegree != null">
+        ACADEGREE = #{acadegree,jdbcType=VARCHAR},
+      </if>
+      <if test="eduyear != null">
+        EDUYEAR = #{eduyear,jdbcType=VARCHAR},
+      </if>
+      <if test="proftype != null">
+        PROFTYPE = #{proftype,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        MAJOR = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="edutype != null">
+        EDUTYPE = #{edutype,jdbcType=VARCHAR},
+      </if>
+      <if test="usedname != null">
+        USEDNAME = #{usedname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="race != null">
+        RACE = #{race,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveno != null">
+        ARCHIVENO = #{archiveno,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        POLITICAL = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddr != null">
+        FAMILYADDR = #{familyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        MARRIAGE = #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        ORIGIN = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="originaddr != null">
+        ORIGINADDR = #{originaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="empphoto != null">
+        EMPPHOTO = #{empphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="usersn != null">
+        USERSN = #{usersn,jdbcType=DOUBLE},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isAssigned != null">
+        is_assigned = #{isAssigned,jdbcType=INTEGER},
+      </if>
+      <if test="assignEmployeeId != null">
+        assign_employee_id = #{assignEmployeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignEmployeeName != null">
+        assign_employee_name = #{assignEmployeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="assignStartTime != null">
+        assign_start_time = #{assignStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignEndTime != null">
+        assign_end_time = #{assignEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cornet != null">
+        CORNET = #{cornet,jdbcType=VARCHAR},
+      </if>
+      <if test="worktel != null">
+        WORKTEL = #{worktel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EMPID = #{empid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bcs.tja.domain.Employee">
+    update v_sys_employee
+    set EMPNAME = #{empname,jdbcType=VARCHAR},
+      DISPLAYORDER = #{displayorder,jdbcType=VARCHAR},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      ORGNAME = #{orgname,jdbcType=VARCHAR},
+      DEPTID = #{deptid,jdbcType=VARCHAR},
+      DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      UNITID = #{unitid,jdbcType=VARCHAR},
+      UNITNAME = #{unitname,jdbcType=VARCHAR},
+      SALUNITID = #{salunitid,jdbcType=VARCHAR},
+      SALUNITNAME = #{salunitname,jdbcType=VARCHAR},
+      SBOOKS = #{sbooks,jdbcType=VARCHAR},
+      ISSALARYPAY = #{issalarypay,jdbcType=VARCHAR},
+      POSSERIAL = #{posserial,jdbcType=VARCHAR},
+      POSSERIALLEVEL = #{posseriallevel,jdbcType=VARCHAR},
+      CLIENTMNGTYPE = #{clientmngtype,jdbcType=VARCHAR},
+      POSID = #{posid,jdbcType=VARCHAR},
+      POSNAME = #{posname,jdbcType=VARCHAR},
+      POSCLASSIFYID = #{posclassifyid,jdbcType=VARCHAR},
+      POSCLASSIFYNAME = #{posclassifyname,jdbcType=VARCHAR},
+      EMPTYPE = #{emptype,jdbcType=VARCHAR},
+      WORKSTATUS = #{workstatus,jdbcType=VARCHAR},
+      ADMINDUTYID = #{admindutyid,jdbcType=VARCHAR},
+      ADMINDUTY = #{adminduty,jdbcType=VARCHAR},
+      IDENTITYNO = #{identityno,jdbcType=VARCHAR},
+      BIRTHDATE = #{birthdate,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=VARCHAR},
+      WORKDATE = #{workdate,jdbcType=VARCHAR},
+      JOINBCSDATE = #{joinbcsdate,jdbcType=VARCHAR},
+      JOINBCSTYPE = #{joinbcstype,jdbcType=VARCHAR},
+      FINANCEWYBEFOREBCS = #{financewybeforebcs,jdbcType=VARCHAR},
+      WORKYEAR = #{workyear,jdbcType=VARCHAR},
+      BCSWORKYEAR = #{bcsworkyear,jdbcType=VARCHAR},
+      FINANCEWORKYEAR = #{financeworkyear,jdbcType=VARCHAR},
+      PROFTITLE = #{proftitle,jdbcType=VARCHAR},
+      ONDUTYTIME = #{ondutytime,jdbcType=VARCHAR},
+      FAMILYTEL = #{familytel,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      SCHOOL = #{school,jdbcType=VARCHAR},
+      EDUDEGREE = #{edudegree,jdbcType=VARCHAR},
+      ACADEGREE = #{acadegree,jdbcType=VARCHAR},
+      EDUYEAR = #{eduyear,jdbcType=VARCHAR},
+      PROFTYPE = #{proftype,jdbcType=VARCHAR},
+      MAJOR = #{major,jdbcType=VARCHAR},
+      EDUTYPE = #{edutype,jdbcType=VARCHAR},
+      USEDNAME = #{usedname,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=VARCHAR},
+      RACE = #{race,jdbcType=VARCHAR},
+      ARCHIVENO = #{archiveno,jdbcType=VARCHAR},
+      POLITICAL = #{political,jdbcType=VARCHAR},
+      FAMILYADDR = #{familyaddr,jdbcType=VARCHAR},
+      MARRIAGE = #{marriage,jdbcType=VARCHAR},
+      ORIGIN = #{origin,jdbcType=VARCHAR},
+      ORIGINADDR = #{originaddr,jdbcType=VARCHAR},
+      EMPPHOTO = #{empphoto,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      USERSN = #{usersn,jdbcType=DOUBLE},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      is_assigned = #{isAssigned,jdbcType=INTEGER},
+      assign_employee_id = #{assignEmployeeId,jdbcType=VARCHAR},
+      assign_employee_name = #{assignEmployeeName,jdbcType=VARCHAR},
+      assign_start_time = #{assignStartTime,jdbcType=TIMESTAMP},
+      assign_end_time = #{assignEndTime,jdbcType=TIMESTAMP},
+      CORNET = #{cornet,jdbcType=VARCHAR},
+      WORKTEL = #{worktel,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where EMPID = #{empid,jdbcType=VARCHAR}
+  </update>
+</mapper>

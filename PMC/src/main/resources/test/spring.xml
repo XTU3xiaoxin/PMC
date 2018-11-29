@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-4.3.xsd  
+                        http://www.springframework.org/schema/tx 
+				        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd  
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+                        http://www.springframework.org/schema/task 
+      					http://www.springframework.org/schema/task/spring-task.xsd">  
+    <!-- 引入配置文件 -->  
+    <bean id="propertyConfigurer"  
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="location" value="classpath:test/jdbc.properties" />  
+    </bean>
+    <!-- 自动扫描 -->  
+    <context:component-scan base-package="com.bcs.tja">
+    	<context:exclude-filter type="aspectj" expression="com.bcs.tja.controller.*" />
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    
+    <!-- 使用 Swagger Restful API文档时，添加此注解 -->  
+    <mvc:default-servlet-handler />
+    
+    <bean id="dataSource_pmc" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+        destroy-method="close">  
+        <property name="driverClass" value="${yy.driver}" />  
+        <property name="jdbcUrl" value="${yy.url}" />  
+        <property name="user" value="${yy.username}" />  
+        <property name="password" value="${yy.password}" />  
+        <property name="minPoolSize" value="30" />
+		<property name="maxPoolSize" value="300" />
+		<property name="maxIdleTime" value="1800" />
+		<!-- 把maxConnectionAge或maxIdleTime 设置成1800（30 分钟）都是有些激进的。对于大多数数据库来讲，几个小时或 
+		许更加合理。你可以用连接测试来确保可靠性，而不是一味地剔除它们（见配置连接测试）。 --> 
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="30" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="testConnectionOnCheckin" value="true" />
+		<property name="automaticTestTable" value="C3P0TestTable" />
+		<!-- 当连接池耗尽时候，一次获得连接数-->  
+		<property name="acquireIncrement" value="3" />
+		<property name="numHelperThreads" value="5" />
+		<!-- numHelperThreads 和maxAdministrativeTaskTime 帮助你配置数据源线程池的行为。
+		默认情况下，每个数据源仅有三个助手线程（helper   threads）。如果性能看起来被高负荷工作拖慢，
+		或者你通过JMX 观察到或直接检测出了“附加任务（pending tasks）”数量超过了0的话，把numHelperThreads 的值提高试试吧。 -->
+		<property name="acquireRetryAttempts" value="3" />
+		<property name="acquireRetryDelay" value="1000" />
+    </bean>
+    
+    <bean id="dataSource_oa" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+        destroy-method="close">  
+        <property name="driverClass" value="${oa.driver}" />  
+        <property name="jdbcUrl" value="${oa.url}" />  
+        <property name="user" value="${oa.username}" />  
+        <property name="password" value="${oa.password}" />  
+        <property name="minPoolSize" value="30" />
+		<property name="maxPoolSize" value="300" />
+		<property name="maxIdleTime" value="1800" />
+		<!-- 把maxConnectionAge或maxIdleTime 设置成1800（30 分钟）都是有些激进的。对于大多数数据库来讲，几个小时或 
+		许更加合理。你可以用连接测试来确保可靠性，而不是一味地剔除它们（见配置连接测试）。 --> 
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="30" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="testConnectionOnCheckin" value="true" />
+		<property name="automaticTestTable" value="C3P0TestTable" />
+		<!-- 当连接池耗尽时候，一次获得连接数-->  
+		<property name="acquireIncrement" value="3" />
+		<property name="numHelperThreads" value="5" />
+		<!-- numHelperThreads 和maxAdministrativeTaskTime 帮助你配置数据源线程池的行为。
+		默认情况下，每个数据源仅有三个助手线程（helper   threads）。如果性能看起来被高负荷工作拖慢，
+		或者你通过JMX 观察到或直接检测出了“附加任务（pending tasks）”数量超过了0的话，把numHelperThreads 的值提高试试吧。 -->
+		<property name="acquireRetryAttempts" value="3" />
+		<property name="acquireRetryDelay" value="1000" />
+    </bean>
+    
+    <!-- 数据库连接池 -->  
+    <bean id="dataSource" class="com.bcs.tja.utils.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry value-ref="dataSource_pmc" key="dataSource_pmc" />  
+                <entry value-ref="dataSource_oa" key="dataSource_oa" />  
+            </map>  
+        </property>  
+        <!-- 默认使用dataSource_yy的数据源 -->  
+        <property name="defaultTargetDataSource" ref="dataSource_pmc" />  
+    </bean>
+    
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" /> 
+        <property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
+        <!-- 自动扫描mapping.xml文件 -->  
+        <property name="mapperLocations" value="classpath:com/bcs/tja/mapper/**/*.xml"></property>  
+        <!-- 多个package之间可以用逗号或者分号等来进行分隔。 -->
+	    <property name="typeAliasesPackage" value="com.bcs.tja.vo,com.bcs.tja.domain,com.bcs.tja.data,com.bcs.tja.dto"/>
+    </bean>  
+  
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="com.bcs.tja.dao" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+    </bean>  
+	
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
+    <bean id="transactionManager"  
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource_pmc" /> 
+    </bean>  
+    
+    <!--Spring事务拦截器 -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<!-- 以browse、list、load、get及is开头的所有方法采用只读型事务控制类型 -->
+				<prop key="browse*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="list*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="is*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="query*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="serch*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="del*">PROPAGATION_REQUIRED,-java.lang.Exception</prop>  
+				<!-- 所有方法均进行事务控制，如果当前没有事务，则新建一个事务 -->
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 自动代理类 -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>com.bcs.tja.service.*</value>
+			</list>
+		</property>
+
+		<!-- 这个属性为true时，表示被代理的是目标类本身而不是目标类的接口 -->
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+
+		<!-- 依赖注入上面定义的事务拦截器transactionInterceptor -->
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 事务注解驱动 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+	
+</beans> 

@@ -1,0 +1,30 @@
+<span ng-controller="NewKisBpmAssignmentReadCtrl">
+	<span ng-if="read.assignee">
+		<span>{{read.assignee}}</span>
+		|
+	</span>
+	<span ng-if="read.showStatus && read.showStatus != ''">
+		<span ng-if="read.showStatus == 0">部门</span>
+		<span ng-if="read.showStatus == 1">角色</span>
+		<span ng-if="read.showStatus == 2">人员</span>
+		|
+	</span>
+	<span ng-if="read.filterStatus && read.filterStatus != ''">
+		<span ng-if="read.filterStatus == 0">不过滤</span>
+		<span ng-if="read.filterStatus == 1">过滤</span>
+		|
+	</span>
+	<span ng-if="read.roleIds">
+		<span ng-repeat="x in read.roleIds">
+			<span ng-if="$index == 0">{{x.name}}</span>
+			<span ng-if="$index != 0">,{{x.name}}</span>
+		</span>
+		|
+	</span>
+	<span ng-if="read.orgIds">
+		<span ng-repeat="x in read.orgIds">
+			<span ng-if="$index == 0">{{x.name}}</span>
+			<span ng-if="$index != 0">,{{x.name}}</span>
+		</span>
+	</span>
+</span>
